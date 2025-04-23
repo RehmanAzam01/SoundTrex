@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundTrex - Music Marketing Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    .neon-glow {
+      background: linear-gradient(90deg, #00f7ff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .sticky-nav {
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .counter {
+      font-size: 3rem;
+      font-weight: 800;
+    }
+    .stats-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #ff00ff;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-bar {
+      background: #333;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .stat-fill {
+      background: linear-gradient(90deg, #00f7ff, #ff00ff);
+      height: 100%;
+      transition: width 2s ease-in-out;
+    }
+    .chat-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff00ff;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .chat-box {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: #1a1a1a;
+      border: 1px solid #ff00ff;
+      border-radius: 10px;
+      width: 300px;
+      padding: 20px;
+      display: none;
+      z-index: 1000;
+    }
+    .guarantee-icon {
+      font-size: 2rem;
+      color: #00f7ff;
+    }
+    .policy-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #ff00ff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .policy-section summary {
+      font-size: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #00f7ff;
+    }
+    .policy-section summary:hover {
+      color: #ff00ff;
+    }
+    .policy-section p, .policy-section ul {
+      margin-top: 10px;
+      color: #ddd;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .separator-img {
+      display: block;
+      max-width: 600px; /* Scales the image down to a maximum width of 600px */
+      height: auto; /* Maintains aspect ratio */
+      object-fit: contain; /* Ensures no cropping or stretching */
+      margin: 0 auto; /* Centers the image within the container */
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="sticky-nav fixed top-0 w-full z-50 py-4">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <div class="flex items-center">
+        <img src="https://i.imgur.com/3AqjXG8.png" alt="SoundTrex Logo" class="h-12 mr-3" />
+        <span class="text-2xl font-bold neon-glow">SoundTrex</span>
+      </div>
+      <div class="space-x-6">
+        <a href="#home" class="text-white hover:text-cyan-400">Home</a>
+        <a href="#about" class="text-white hover:text-cyan-400">About</a>
+        <a href="#artists" class="text-white hover:text-cyan-400">Artists</a>
+        <a href="#stats" class="text-white hover:text-cyan-400">Stats</a>
+        <a href="#services" class="text-white hover:text-cyan-400">Services</a>
+        <a href="#guarantee" class="text-white hover:text-cyan-400">Guarantee</a>
+        <a href="#pricing" class="text-white hover:text-cyan-400">Pricing</a>
+        <a href="#cart" class="text-white hover:text-cyan-400">Cart</a>
+        <a href="signup.html" class="text-white hover:text-cyan-400">Signup</a>
+        <a href="signin.html" class="text-white hover:text-cyan-400">Sign In</a>
+        <a href="#policy" class="text-white hover:text-cyan-400">Policy</a>
+        <a href="#contact" class="text-white hover:text-cyan-400">Contact</a>
+        <span id="userStatus" class="text-white"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="w-full h-[960px] flex items-center justify-center pt-[100px] bg-black">
+    <div class="text-center hero-overlay">
+      <h1 class="text-4xl md:text-5xl font-bold neon-glow mb-4">SoundTrex</h1>
+      <h2 class="text-6xl md:text-8xl font-bold neon-glow mb-6">$1M+ Revenue Generated</h2>
+      <h3 class="text-3xl md:text-4xl font-semibold mb-4">100M+ Streams Delivered</h3>
+      <p class="text-2xl mb-6">Worked with 200+ Artists Globally</p>
+      <p class="text-xl max-w-2xl mx-auto">We’re a full-stack music marketing agency helping artists break through the noise and go viral. From playlisting and ad strategy to viral content and monetization, we scale your career — fast.</p>
+      <a href="#contact" class="mt-6 inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full text-lg font-semibold hover:scale-105 transition">Start Your Campaign</a>
+    </div>
+  </section>
+
+  <!-- Image Separator 1 (Unchanged) -->
+  <div class="w-full h-64 bg-cover bg-center mt-8" style="background-image: url('https://i.imgur.com/9SIuhFs.png')"></div>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-black">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow mb-12">About SoundTrex</h2>
+      <p class="text-xl max-w-3xl mx-auto mb-6">SoundTrex is a premier music marketing agency dedicated to transforming the careers of artists worldwide. We combine cutting-edge technology, data-driven strategies, and a deep understanding of the music industry to deliver unparalleled results.</p>
+      <p class="text-xl max-w-3xl mx-auto mb-6">Our team works closely with artists to craft personalized campaigns that resonate with global audiences. From securing playlist placements to orchestrating viral social media strategies, we’ve helped over 200 artists achieve their dreams, generating millions in revenue and streams along the way.</p>
+      <p class="text-xl max-w-3xl mx-auto">We’ve changed lives by turning passion into profit, helping artists break into new markets, and ensuring their music reaches the right ears. At SoundTrex, your music is our mission.</p>
+    </div>
+  </section>
+
+  <!-- Image Separator 2 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/Jz5JMxZ.png" alt="Separator 2" class="separator-img">
+  </div>
+
+  <!-- Previous Artists Section -->
+  <section id="artists" class="py-20 bg-gradient-to-b from-black to-gray-900">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Artists We've Worked With</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/zT19WUj.jpg" alt="Alex Vibe" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"SoundTrex took my streams from 10k to 1M in just 3 months!"</p>
+            <p class="font-semibold mt-2">– Alex Vibe, Pop Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/Jb2V4Jm.jpg" alt="Mia Rhythm" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"Their viral strategy got my song on TikTok's FYP!"</p>
+            <p class="font-semibold mt-2">– Mia Rhythm, Hip-Hop Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/hoq49qd.jpg" alt="DJ Neon" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"I landed a sync deal with a major film thanks to SoundTrex!"</p>
+            <p class="font-semibold mt-2">– DJ Neon, EDM Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/1GdUfOo.jpg" alt="Sara Melody" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"SoundTrex helped me reach 500k streams on Spotify with their playlist strategy!"</p>
+            <p class="font-semibold mt-2">– Sara Melody, Indie Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/vBZuZ1B.jpg" alt="Liam Beats" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"Their influencer collabs boosted my song to chart in 3 countries!"</p>
+            <p class="font-semibold mt-2">– Liam Beats, Rap Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg flex items-center">
+          <img src="https://i.imgur.com/D95vyr3.jpg" alt="Eva Chords" class="w-24 h-24 rounded-full mr-4 object-cover" />
+          <div>
+            <p class="italic">"Thanks to SoundTrex, my merch sales doubled in just 2 months!"</p>
+            <p class="font-semibold mt-2">– Eva Chords, Folk Artist</p>
+            <p class="text-yellow-400">★★★★☆</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Separator 3 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/Vu0xNzv.png" alt="Separator 3" class="separator-img">
+  </div>
+
+  <!-- Stats Dashboard Section -->
+  <section id="stats" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Our Campaign Impact</h2>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="200">200+</p>
+          <p>Artists Served</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="100">100M+</p>
+          <p>Million Streams</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="1">$1M+</p>
+          <p>Million Revenue</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="167">167</p>
+          <p>Ratings</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="50">50+</p>
+          <p>Countries Reached</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="300">300+</p>
+          <p>Playlists Secured</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="25">25+</p>
+          <p>Sync Deals Closed</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="500">500+</p>
+          <p>Influencer Collabs</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="10">10</p>
+          <p>Awards Won</p>
+        </div>
+        <div class="stats-card">
+          <p class="counter text-5xl font-bold mb-2" data-target="1000">1000+</p>
+          <p>Campaigns Run</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Separator 4 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/9z76AOF.png" alt="Separator 4" class="separator-img">
+  </div>
+
+  <!-- Why Artists Trust Us Section -->
+  <section id="services" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Why Artists Trust Us</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/c2WSl14.jpg" alt="Service 1" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Built for Modern Musicians</h3>
+          <p>Custom campaigns tailored to your genre and audience, designed to maximize streams and fan growth.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/IPYFzIC.png" alt="Service 2" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Sync Licensing & Streaming</h3>
+          <p>Get your music on major platforms and secure licensing deals for TV, film, and ads.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/2GcZ61A.jpg" alt="Service 3" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Fan Growth & Monetization</h3>
+          <p>Turn streams into revenue with merch, NFTs, and strategic monetization plans.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/E47uPzl.jpg" alt="Service 4" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Global Market Expansion</h3>
+          <p>Reach new audiences in over 50 countries with localized marketing strategies.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/dxMAdpY.jpg" alt="Service 5" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Influencer Networks</h3>
+          <p>Partner with 500+ influencers to boost your music's visibility across platforms.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg hover:scale-105 transition">
+          <img src="https://i.imgur.com/6jPIx1E.jpg" alt="Service 6" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-2xl font-semibold mb-2">Award-Winning Strategies</h3>
+          <p>Our campaigns have won 10 industry awards for innovation and impact.</p>
+        </div>
+      </div>
+      <!-- Stats with Bars -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <p class="text-3xl font-bold mb-2">95%</p>
+          <p class="mb-2">Client Satisfaction Rate</p>
+          <div class="stat-bar">
+            <div class="stat-fill" style="width: 95%"></div>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold mb-2">80%</p>
+          <p class="mb-2">Campaign Success Rate</p>
+          <div class="stat-bar">
+            <div class="stat-fill" style="width: 80%"></div>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold mb-2">90%</p>
+          <p class="mb-2">Artist Retention Rate</p>
+          <div class="stat-bar">
+            <div class="stat-fill" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold mb-2">85%</p>
+          <p class="mb-2">Stream Growth Rate</p>
+          <div class="stat-bar">
+            <div class="stat-fill" style="width: 85%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Separator 5 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/52Jeov0.jpg" alt="Separator 5" class="separator-img">
+  </div>
+
+  <!-- Our Guarantee Section -->
+  <section id="guarantee" class="py-20 bg-gradient-to-b from-black to-gray-900">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Our Guarantee</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <div class="flex items-center mb-4">
+            <span class="guarantee-icon mr-2">✅</span>
+            <h3 class="text-2xl font-semibold">100% Worry-Free Promotion</h3>
+          </div>
+          <p>We guarantee results by adding your music to the best playlists, just as we do for our biggest clients. See exactly which playlists we’ve secured for you and watch your numbers grow with a campaign that’s truly effortless and 100% organic.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <div class="flex items-center mb-4">
+            <span class="guarantee-icon mr-2">🔒</span>
+            <h3 class="text-2xl font-semibold">Risk-Free, Compliant Promotion</h3>
+          </div>
+          <p>We understand concerns about fake streams and distributor risks. That’s why we use no bots or shortcuts—only real, engaged listeners through targeted paid ad campaigns. We guarantee our promotions won’t cause issues with your distributor, or you get your full money back.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <div class="flex items-center mb-4">
+            <span class="guarantee-icon mr-2">🛡️</span>
+            <h3 class="text-2xl font-semibold">Our Playlist Placement Promise</h3>
+          </div>
+          <p>If we can’t add you to the advertised number of playlists your campaign requires within 10 business days of purchase, you have the choice of a full refund or a complimentary alternative campaign—your choice.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <div class="flex items-center mb-4">
+            <span class="guarantee-icon mr-2">📈</span>
+            <h3 class="text-2xl font-semibold">Organic Growth, No Bots</h3>
+          </div>
+          <p>We stand by our ability to get your music in the right places. With no bot streams and a focus on organic growth, we drive real engagement to ensure your music thrives without risking removal by distributors.</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="#pricing" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full text-lg font-semibold hover:scale-105 transition">Start Your Risk-Free Campaign</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Separator 6 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/Zz2ONPU.jpg" alt="Separator 6" class="separator-img">
+  </div>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Choose Your Plan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4">Artist Starter Plan</h3>
+          <p class="text-4xl font-bold mb-4">$500</p>
+          <ul class="space-y-2 mb-6">
+            <li>AI Programmed Manual Targeting</li>
+            <li>Facebook, Instagram & Google Ads</li>
+            <li>70k+ Reach Spotify Campaign</li>
+            <li>Spotify Playlist Placements (Up to 5)</li>
+            <li>YouTube Organic Growth</li>
+            <li>Genius Article + Google Ranking</li>
+            <li>Brand Manager + Fan Diversion</li>
+            <li>24/7 Support</li>
+          </ul>
+          <button onclick="addToCart('Artist Starter Plan', 500)" class="block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full text-center font-semibold hover:scale-105 transition">Add to Cart</button>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4">Artist Viral Boost Plan</h3>
+          <p class="text-4xl font-bold mb-4">$999</p>
+          <ul class="space-y-2 mb-6">
+            <li>TikTok + IG Viral Ad Strategy</li>
+            <li>170K+ Spotify Campaign</li>
+            <li>10x Playlist Placements</li>
+            <li>3 Influencers Use Your Song</li>
+            <li>YouTube Campaigns + Monetization</li>
+            <li>FYP Targeting + Blog Features</li>
+            <li>Merch Design Setup + Sync Licensing</li>
+            <li>Weekly Calls + Support</li>
+          </ul>
+          <button onclick="addToCart('Artist Viral Boost Plan', 999)" class="block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full text-center font-semibold hover:scale-105 transition">Add to Cart</button>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4">Ultimate Artist Branding</h3>
+          <p class="text-4xl font-bold mb-4">$1,450</p>
+          <ul class="space-y-2 mb-6">
+            <li>300K+ Spotify & YouTube Campaign</li>
+            <li>Platform Domination on TikTok, IG, YouTube</li>
+            <li>SEO + Google Ranking + Charting</li>
+            <li>20 Influencers Use Your Track</li>
+            <li>Merch Store Creation</li>
+            <li>NFT Setup, EPK, Press, Podcasts</li>
+            <li>Revenue Monetization Strategies</li>
+            <li>Weekly Strategy Calls + VIP Support</li>
+          </ul>
+          <button onclick="addToCart('Ultimate Artist Branding', 1450)" class="block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full text-center font-semibold hover:scale-105 transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="mt-12">
+        <h3 class="text-3xl font-bold neon-glow text-center mb-8">Frequently Asked Questions</h3>
+        <div class="space-y-4 max-w-3xl mx-auto">
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">How soon can I see results?</h4>
+            <p>Most artists see increased streams and engagement within 2-4 weeks, depending on the plan.</p>
+          </div>
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">Do you work with all genres?</h4>
+            <p>Yes, we tailor campaigns for all genres, from pop to classical.</p>
+          </div>
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">What makes SoundTrex different?</h4>
+            <p>Our data-driven strategies and global network ensure maximum impact for your music.</p>
+          </div>
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">Can I switch plans mid-campaign?</h4>
+            <p>Yes, you can upgrade your plan at any time to access more features and support.</p>
+          </div>
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">Do you offer refunds?</h4>
+            <p>We offer a satisfaction guarantee; contact us within 7 days if you're not seeing progress.</p>
+          </div>
+          <div class="p-4 bg-gray-900 rounded-lg">
+            <h4 class="font-semibold">How do you ensure campaign success?</h4>
+            <p>We use advanced analytics and real-time adjustments to optimize your campaign performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Separator 7 -->
+  <div class="container mx-auto px-6">
+    <img src="https://i.imgur.com/nfKFspv.png" alt="Separator 7" class="separator-img">
+  </div>
+
+  <!-- Cart Section -->
+  <section id="cart" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Your Cart</h2>
+      <div id="cartItems" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+      <div class="text-center mt-8">
+        <p id="cartTotal" class="text-2xl font-bold mb-4">Total: $0</p>
+        <button onclick="clearCart()" class="bg-red-500 text-white py-2 px-6 rounded-full font-semibold hover:bg-red-600 transition">Clear Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Policy Section -->
+  <section id="policy" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow text-center mb-12">Company Policies</h2>
+      <div class="max-w-4xl mx-auto">
+        <!-- Refund Policy -->
+        <details class="policy-section">
+          <summary>Refund Policy</summary>
+          <p>At SoundTrex, we are committed to your satisfaction. If you are not seeing progress with your campaign, you may be eligible for a refund under the following conditions:</p>
+          <ul class="list-disc pl-6">
+            <li><strong>Eligibility</strong>: Refunds are available within 7 days of purchase if no measurable progress (e.g., streams, playlist placements) has been made.</li>
+            <li><strong>Playlist Placement Promise</strong>: If we fail to add your music to the advertised number of playlists within 10 business days, you can choose a full refund or a complimentary alternative campaign.</li>
+            <li><strong>Non-Refundable Cases</strong>: Refunds are not available if campaign progress has been made, such as playlist placements or stream increases, or if the campaign has been active for more than 7 days.</li>
+            <li><strong>Process</strong>: To request a refund, contact us at <a href="mailto:rehmanazam01@gmail.com" class="text-cyan-400 hover:underline">rehmanazam01@gmail.com</a> with your purchase details. We’ll review your request within 3-5 business days.</li>
+            <li><strong>Distributor Compliance</strong>: If our promotions cause issues with your distributor due to non-compliance, we guarantee a full refund, as outlined in our "Risk-Free, Compliant Promotion" guarantee.</li>
+          </ul>
+        </details>
+
+        <!-- Privacy Policy -->
+        <details class="policy-section">
+          <summary>Privacy Policy</summary>
+          <p>SoundTrex values your privacy and is committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data:</p>
+          <ul class="list-disc pl-6">
+            <li><strong>Information We Collect</strong>: We collect your name, email, and payment information when you sign up or purchase a plan. We may also collect usage data, such as browsing behavior on our website, to improve our services.</li>
+            <li><strong>How We Use Your Information</strong>: Your data is used to process your purchases, manage your account, communicate campaign updates, and personalize your experience. We may also use anonymized data for analytics and marketing purposes.</li>
+            <li><strong>Data Sharing</strong>: We do not sell or share your personal information with third parties, except as required to fulfill your campaign (e.g., playlist curators, ad platforms) or as mandated by law.</li>
+            <li><strong>Data Security</strong>: We implement industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</li>
+            <li><strong>Your Rights</strong>: You can request access, correction, or deletion of your personal data by contacting us at <a href="mailto:rehmanazam01@gmail.com" class="text-cyan-400 hover:underline">rehmanazam01@gmail.com</a>. We’ll respond within 30 days.</li>
+            <li><strong>Cookies</strong>: We use cookies to enhance your browsing experience. You can manage cookie preferences through your browser settings.</li>
+            <li><strong>Updates to This Policy</strong>: We may update this Privacy Policy periodically. Changes will be posted on this page with an updated effective date.</li>
+          </ul>
+          <p><strong>Effective Date</strong>: April 19, 2025</p>
+        </details>
+
+        <!-- Terms of Service -->
+        <details class="policy-section">
+          <summary>Terms of Service</summary>
+          <p>By using SoundTrex’s services, you agree to the following terms:</p>
+          <ul class="list-disc pl-6">
+            <li><strong>Eligibility</strong>: You must be at least 18 years old to use our services. By signing up, you confirm that you meet this requirement.</li>
+            <li><strong>Service Scope</strong>: SoundTrex provides music marketing services, including playlist placements, ad campaigns, and monetization strategies. Results are not guaranteed and may vary based on market conditions and artist content.</li>
+            <li><strong>Payment</strong>: All payments are due upfront. We accept major credit cards and digital payment methods. Prices are subject to change without prior notice.</li>
+            <li><strong>User Conduct</strong>: You agree not to misuse our services, including submitting fraudulent information or violating intellectual property rights. Violation may result in account termination.</li>
+            <li><strong>Termination</strong>: We reserve the right to terminate your account if you violate these terms or fail to comply with campaign requirements (e.g., providing necessary assets).</li>
+            <li><strong>Limitation of Liability</strong>: SoundTrex is not liable for indirect damages, such as lost profits, arising from the use of our services. Our liability is limited to the amount you paid for the service.</li>
+            <li><strong>Governing Law</strong>: These terms are governed by the laws of the United States. Disputes will be resolved in the courts of California.</li>
+          </ul>
+        </details>
+
+        <!-- Campaign Conduct Policy -->
+        <details class="policy-section">
+        <summary>Campaign Conduct Policy</summary>
+        <p>SoundTrex maintains strict standards for campaign conduct to ensure ethical and effective music promotion:</p>
+        <ul class="list-disc pl-6">
+          <li><strong>No Bots</strong>: We guarantee that all streams and engagement are from real, organic listeners. We do not use bots or artificial methods to inflate numbers.</li>
+          <li><strong>Compliance</strong>: All campaigns comply with the terms of service of streaming platforms (e.g., Spotify, YouTube) and music distributors. We avoid practices that risk removal or penalties.</li>
+          <li><strong>Transparency</strong>: You will receive detailed reports on playlist placements, ad performance, and stream growth. We provide full transparency on where your music is promoted.</li>
+          <li><strong>Artist Responsibilities</strong>: You must provide high-quality music and assets (e.g., artwork, links) for campaigns. Failure to do so may delay or impact campaign results.</li>
+          <li><strong>Prohibited Content</strong>: We do not promote music that contains explicit hate speech, violence, or illegal content. We reserve the right to reject campaigns that violate this policy.</li>
+          <li><strong>Fair Use</strong>: Campaigns must align with fair use practices. We do not support unauthorized use of copyrighted material in promotions.</li>
+        </ul>
+      </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold neon-glow mb-6">Ready to Scale Your Music Career?</h2>
+      <p class="text-xl mb-8">Let’s turn your streams into revenue.</p>
+      <div class="space-x-4 mb-8">
+        <a href="mailto:rehmanazam01@gmail.com" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-2 px-6 rounded-full font-semibold hover:scale-105 transition">Email Us</a>
+        <a href="https://www.instagram.com/rehman.northxagency?igsh=MTR55eHdtNDk5aDU0Nw==" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-2 px-6 rounded-full font-semibold hover:scale-105 transition">Instagram</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#pricing" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-8 rounded-full font-semibold hover:scale-105 transition">Start Your Campaign</a>
+        <a href="mailto:rehmanazam01@gmail.com" class="inline-block bg-transparent border border-cyan-500 text-cyan-500 py-3 px-8 rounded-full font-semibold hover:bg-cyan-500 hover:text-white transition">Book a Free Strategy Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Support Chat -->
+  <div class="chat-bubble" onclick="toggleChat()">💬</div>
+  <div class="chat-box" id="chatBox">
+    <h3 class="text-xl font-semibold mb-4">AI Support Assistant</h3>
+    <p class="mb-4">Ask anything about SoundTrex!</p>
+    <textarea id="chatInput" class="w-full p-2 rounded bg-gray-800 text-white mb-4" placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage()" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-2 px-4 rounded">Send</button>
+    <div id="chatMessages" class="mt-4"></div>
+  </div>
+
+  <script>
+    // GSAP Animations
+    gsap.from(".counter", {
+      textContent: function() {
+        return this.getAttribute('data-target'); // Start from the target value
+      },
+      duration: 3,
+      ease: "power1.inOut",
+      snap: { textContent: 1 },
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".counter",
+        start: "top 80%",
+      },
+    });
+
+    gsap.from("nav", {
+      y: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    gsap.from("#home h1, #home h2, #home h3, #home p, #home a", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power2.out",
+    });
+
+    gsap.from("#about p", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top 80%",
+      },
+    });
+
+    gsap.from("#artists .p-6", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#artists",
+        start: "top 80%",
+      },
+    });
+
+    gsap.from("#services .p-6", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#services",
+        start: "top 80%",
+      },
+    });
+
+    gsap.from("#guarantee .p-6", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#guarantee",
+        start: "top 80%",
+      },
+    });
+
+    gsap.from("#pricing .p-6", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#pricing",
+        start: "top 80%",
+      },
+    });
+
+    // Chat Functionality with AI Responses
+    function toggleChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function sendMessage() {
+      const chatInput = document.getElementById('chatInput');
+      const chatMessages = document.getElementById('chatMessages');
+      const message = chatInput.value.trim().toLowerCase();
+
+      if (message) {
+        const userMessage = document.createElement('p');
+        userMessage.textContent = `You: ${chatInput.value.trim()}`; // Show original input for clarity
+        chatMessages.appendChild(userMessage);
+
+        // Log the message for debugging
+        console.log("User message:", message);
+
+        const botMessage = document.createElement('p');
+        let response = "I'm here to help! Could you please provide more details or try rephrasing your question?";
+
+        // Use regular expressions for more flexible matching
+        if (/what.*soundtrex.*do|what.*is.*soundtrex|tell.*about.*soundtrex/i.test(message)) {
+          response = "SoundTrex is a music marketing agency that helps artists grow their careers through targeted campaigns, playlist placements, viral strategies, and monetization plans. We’ve worked with over 200 artists globally!";
+        } else if (/pric(e|ing)|plan(s)?|cost|how.*much/i.test(message)) {
+          response = "We offer three plans: Artist Starter Plan ($500), Artist Viral Boost Plan ($999), and Ultimate Artist Branding Plan ($1,450). Each plan is tailored to help artists at different stages of their career. Check the 'Choose Your Plan' section for details!";
+        } else if (/how.*start|begin|sign.*up|join/i.test(message)) {
+          response = "To start, head to the 'Choose Your Plan' section, select a plan that suits you, and click 'Select' to get in touch with us. You can also book a free strategy call via the 'Book a Free Strategy Call' button in the Contact section!";
+        } else if (/result(s)?|success|how.*long.*results|progress/i.test(message)) {
+          response = "Our campaigns have delivered over 100M+ streams, generated $1M+ in revenue, and we maintain a 95% client satisfaction rate. Most artists see results within 2-4 weeks, depending on the plan!";
+        } else if (/guarantee|refund|money.*back|risk/i.test(message)) {
+          response = "We offer a 100% worry-free promotion guarantee. If we can’t add you to the advertised number of playlists within 10 business days, you can choose a full refund or a complimentary alternative campaign. Plus, our promotions are bot-free and compliant with distributors! Check our Refund Policy in the Company Policy section for more details.";
+        } else if (/genre(s)?|type.*music|music.*genre/i.test(message)) {
+          response = "Yes, we work with all genres! From pop to classical, we tailor campaigns to fit your music style and audience.";
+        } else if (/contact|reach.*you|email|phone/i.test(message)) {
+          response = "You can reach us via email at rehmanazam01@gmail.com or through Instagram at @rehman.northxagency. Check the Contact section for links!";
+        } else if (/policy|policies|privacy|terms/i.test(message)) {
+          response = "You can find all our policies, including Refund Policy, Privacy Policy, Terms of Service, and Campaign Conduct Policy, in the Company Policy section of our website.";
+        }
+
+        botMessage.textContent = `AI Assistant: ${response}`;
+        chatMessages.appendChild(botMessage);
+
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    // User Authentication and Cart Functionality
+    function addToCart(planName, price) {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (!user) {
+        alert("Please sign in to add items to your cart.");
+        window.location.href = 'signin.html';
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem(`cart_${user.email}`)) || [];
+      cart.push({ planName, price });
+      localStorage.setItem(`cart_${user.email}`, JSON.stringify(cart));
+      alert(`${planName} added to cart!`);
+      displayCart();
+    }
+
+    function updateUserStatus() {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      const userStatus = document.getElementById('userStatus');
+      if (user) {
+        userStatus.textContent = `Welcome, ${user.name}!`;
+      } else {
+        userStatus.textContent = '';
+      }
+    }
+
+    function displayCart() {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      cartItems.innerHTML = '';
+
+      if (!user) {
+        cartItems.innerHTML = '<p class="text-center text-xl">Please sign in to view your cart.</p>';
+        cartTotal.textContent = 'Total: $0';
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem(`cart_${user.email}`)) || [];
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-center text-xl">Your cart is empty.</p>';
+        cartTotal.textContent = 'Total: $0';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'p-6 bg-gray-900 rounded-lg';
+        itemDiv.innerHTML = `
+          <h3 class="text-2xl font-semibold mb-2">${item.planName}</h3>
+          <p class="text-xl font-bold mb-4">$${item.price}</p>
+        `;
+        cartItems.appendChild(itemDiv);
+      });
+      cartTotal.textContent = `Total: $${total}`;
+    }
+
+    function clearCart() {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user) {
+        localStorage.removeItem(`cart_${user.email}`);
+        displayCart();
+      }
+    }
+
+    // Initialize user status and cart on page load
+    updateUserStatus();
+    displayCart();
+  </script>
+</body>
+</html>
